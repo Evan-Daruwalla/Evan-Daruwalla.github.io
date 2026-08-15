@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evan Daruwalla</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --fg: #14161a;
+    --muted: #5c6570;
+    --rule: #e2e4e6;
+    --link: #1a56b8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101215;
+      --fg: #eceef1;
+      --muted: #98a1ab;
+      --rule: #262a30;
+      --link: #7aa7f0;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+  }
+  main { max-width: 34rem; width: 100%; }
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 7vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 1.25rem 0;
+  }
+  .label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: clamp(1rem, 3.5vw, 1.15rem);
+    word-break: break-all;
+  }
+  a:hover, a:focus-visible { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <main>
+    <h1>Evan Daruwalla</h1>
+    <hr>
+    <span class="label">Email</span>
+    <a href="mailto:evandaruwalla1@gmail.com">evandaruwalla1@gmail.com</a>
+  </main>
+</body>
+</html>
