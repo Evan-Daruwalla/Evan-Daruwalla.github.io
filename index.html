@@ -45,6 +45,7 @@
     border-top: 1px solid var(--rule);
     margin: 1.25rem 0;
   }
+  .row + .row { margin-top: 1.1rem; }
   .label {
     display: block;
     font-size: 0.75rem;
@@ -66,8 +67,14 @@
   <main>
     <h1>Evan Daruwalla</h1>
     <hr>
-    <span class="label">Email</span>
-    <a href="mailto:evandaruwalla1@gmail.com">evandaruwalla1@gmail.com</a>
+    <div class="row">
+      <span class="label">Email</span>
+      <a href="mailto:evandaruwalla1@gmail.com">evandaruwalla1@gmail.com</a>
+    </div>
+    <div class="row">
+      <span class="label">GitHub</span>
+      <a href="https://github.com/Evan-Daruwalla">github.com/Evan-Daruwalla</a>
+    </div>
   </main>
 </body>
 </html>
