@@ -1,0 +1,43 @@
+#!/bin/sh
+# VERSION CONTROLLED at .githooks/pre-commit, and selected with
+#   git config core.hooksPath .githooks
+# Git never enables hooks from a clone by itself; that one line does. Before
+# 2026-09-10 this gate lived only in .git/hooks, which git does not track, so
+# it protected one machine and vanished on clone.
+#
+# Why .githooks/ rather than scripts/git-hooks/: a GitHub Pages site built by
+# Jekyll publishes ordinary directories from the repo root, so scripts/ would
+# be served as a public page. Jekyll skips dot-directories. Both of this
+# owner's profile repositories use the same location so they stay identical.
+#
+# Delegating pre-commit gate. Installed 2026-08-20 — this repo previously had
+# NO gate of any kind, so a commit here was never scanned for secrets.
+#
+# Both jobs delegate to ONE executing copy shared by every repo, so a fix lands
+# once instead of in each repo's fork. Inlining a copy per repo is exactly how
+# earlier gate fixes landed on files that never execute (record 2026-08-05).
+#
+# Emergency bypass:  git commit --no-verify  (don't make it a habit).
+
+# ── 1. Secret gate ───────────────────────────────────────────────────────────
+# Fails OPEN on a scanner error (a scanner bug must not wedge commits) but
+# NOISILY — a silent skip is indistinguishable from a clean scan.
+GATE="${HOME}/.claude/skills/commit-gate/hooks/pre-commit"
+if [ -f "$GATE" ]; then
+  sh "$GATE" || exit 1
+else
+  echo "commit-gate WARNING: gate not found at $GATE — secret gate SKIPPED (fail-open)." >&2
+  echo "The commit proceeds UNSCANNED." >&2
+fi
+
+# ── 2. Record invariants ─────────────────────────────────────────────────────
+# No-op unless an append-only project record is actually staged. Fails CLOSED.
+REC_GUARD="${HOME}/.claude/skills/project-memory/hooks/pre-commit-record"
+if [ -f "$REC_GUARD" ]; then
+  sh "$REC_GUARD" || exit 1
+else
+  echo "record-check WARNING: record guard not found at $REC_GUARD" >&2
+  echo "  record invariants NOT verified for this commit." >&2
+fi
+
+exit 0
