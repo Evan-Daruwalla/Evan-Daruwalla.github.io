@@ -20,8 +20,8 @@
 # Emergency bypass:  git commit --no-verify  (don't make it a habit).
 
 # ── 1. Secret gate ───────────────────────────────────────────────────────────
-# Fails OPEN on a scanner error (a scanner bug must not wedge commits) but
-# NOISILY — a silent skip is indistinguishable from a clean scan.
+# Fails CLOSED: a missing gate or a scanner error blocks the commit (changed
+# 2026-09-29; it failed open before). Bypass deliberately with --no-verify.
 GATE="${HOME}/.claude/skills/commit-gate/hooks/pre-commit"
 if [ -f "$GATE" ]; then
   sh "$GATE" || exit 1
