@@ -26,8 +26,9 @@ GATE="${HOME}/.claude/skills/commit-gate/hooks/pre-commit"
 if [ -f "$GATE" ]; then
   sh "$GATE" || exit 1
 else
-  echo "commit-gate WARNING: gate not found at $GATE — secret gate SKIPPED (fail-open)." >&2
-  echo "The commit proceeds UNSCANNED." >&2
+  echo "commit-gate BLOCKED: secret gate not found at $GATE - broken, fix it." >&2
+  echo "Install the commit-gate skill, or bypass deliberately with git commit --no-verify." >&2
+  exit 1
 fi
 
 # ── 2. Record invariants ─────────────────────────────────────────────────────
